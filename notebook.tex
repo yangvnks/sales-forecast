@@ -1,0 +1,1093 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{random-forest}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Random Forest}\label{random-forest}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k}{import} \PY{n}{Series}\PY{p}{,} \PY{n}{DataFrame}
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{,} \PY{n}{StratifiedKFold}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+         \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{timedelta}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{RobustScaler}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+         \PY{k+kn}{import}  \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{plotly} \PY{k}{as} \PY{n+nn}{py}
+         \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+         \PY{k+kn}{from} \PY{n+nn}{plotly} \PY{k}{import} \PY{n}{tools}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+         \PY{k+kn}{from} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{offline} \PY{k}{import} \PY{n}{download\PYZus{}plotlyjs}\PY{p}{,} \PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{,} \PY{n}{plot}\PY{p}{,} \PY{n}{iplot}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{colorlover}  \PY{k}{as} \PY{n+nn}{cl}
+         \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{boxcox1p}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{skew}
+         
+         
+         \PY{c+c1}{\PYZsh{} environment settings}
+         \PY{n}{data\PYZus{}path\PYZus{}out} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/output/}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{c+c1}{\PYZsh{}hack to avoid showing deprecationg warnings}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{(}\PY{n}{connected}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Deserialize previously saved data from \PYZdq{}preprocessing\PYZdq{}}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{data\PYZus{}path\PYZus{}out}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}pp.obj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{train\PYZus{}pp}\PY{p}{:}
+             \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{train\PYZus{}pp}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Dummies}
+         \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{)}
+         \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} (523021, 73)
+\end{Verbatim}
+            
+    \subsection{Check that all closed stores don't have
+sales}\label{check-that-all-closed-stores-dont-have-sales}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IsOpen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} Empty DataFrame
+         Columns: [StoreID, Date, IsHoliday, IsOpen, HasPromotions, NearestCompetitor, Region\_AreaKM2, Region\_GDP, Region\_PopulationK, CloudCover, Max\_Dew\_PointC, Max\_Humidity, Max\_Sea\_Level\_PressurehPa, Max\_TemperatureC, Max\_VisibilityKm, Max\_Wind\_SpeedKm\_h, Mean\_Dew\_PointC, Mean\_Humidity, Mean\_Sea\_Level\_PressurehPa, Mean\_TemperatureC, Mean\_VisibilityKm, Mean\_Wind\_SpeedKm\_h, Min\_Dew\_PointC, Min\_Humidity, Min\_Sea\_Level\_PressurehPa, Min\_TemperatureC, Min\_VisibilitykM, Precipitationmm, WindDirDegrees, Hol\_and\_open, Region\_PD, NumberOfSales, NumberOfCustomers, StoreType\_Hyper Market, StoreType\_Standard Market, StoreType\_Super Market, StoreType\_Shopping Center, AssortmentType\_General, AssortmentType\_With Non-Food Department, AssortmentType\_With Fish Department, Region\_0, Region\_1, Region\_10, Region\_2, Region\_3, Region\_4, Region\_5, Region\_7, Region\_9, Region\_6, Region\_8, Events\_Fog, Events\_Fog-Rain, Events\_Fog-Rain-Hail, Events\_Fog-Rain-Hail-Thunderstorm, Events\_Fog-Rain-Snow, Events\_Fog-Rain-Snow-Hail, Events\_Fog-Rain-Thunderstorm, Events\_Fog-Snow, Events\_Fog-Snow-Hail, Events\_Fog-Thunderstorm, Events\_Normal, Events\_Rain, Events\_Rain-Hail, Events\_Rain-Hail-Thunderstorm, Events\_Rain-Snow, Events\_Rain-Snow-Hail, Events\_Rain-Snow-Hail-Thunderstorm, Events\_Rain-Snow-Thunderstorm, Events\_Rain-Thunderstorm, Events\_Snow, Events\_Snow-Hail, Events\_Thunderstorm]
+         Index: []
+         
+         [0 rows x 73 columns]
+\end{Verbatim}
+            
+    \subsection{New time features}\label{new-time-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{day}
+         \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{month}
+         \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{year}
+         \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{week}
+         \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DaysInMonth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{daysinmonth}
+         \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DayOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{dayofyear}
+\end{Verbatim}
+
+
+    \subsection{New sales features}\label{new-sales-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{k}{def} \PY{n+nf}{num\PYZus{}of\PYZus{}features}\PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{,}\PY{n}{week}\PY{p}{,}\PY{n}{year}\PY{p}{,}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{)}\PY{p}{:}
+             \PY{n}{num\PYZus{}holidays}\PY{o}{=}\PY{l+m+mi}{0}
+         
+             \PY{k}{if} \PY{n}{week} \PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{n}{week\PYZus{}before}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{52}\PY{p}{,}\PY{n}{year}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{week\PYZus{}after}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{year}\PY{p}{]}
+             \PY{k}{if} \PY{n}{week} \PY{o}{==} \PY{l+m+mi}{52}\PY{p}{:}
+                 \PY{n}{week\PYZus{}after}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{year}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{week\PYZus{}before}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{51}\PY{p}{,}\PY{n}{year}\PY{p}{]}
+             \PY{k}{if} \PY{p}{(}\PY{n}{week}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{week}\PY{o}{\PYZlt{}}\PY{l+m+mi}{52}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{week\PYZus{}before}\PY{o}{=}\PY{p}{[}\PY{n}{week}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{year}\PY{p}{]}
+                 \PY{n}{week\PYZus{}after}\PY{o}{=}\PY{p}{[}\PY{n}{week}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{year}\PY{p}{]}
+             
+             \PY{n}{before\PYZus{}df} \PY{o}{=} \PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{week\PYZus{}before}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZam{}}
+                                           \PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{week\PYZus{}before}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+             
+             \PY{n}{after\PYZus{}df} \PY{o}{=} \PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{week\PYZus{}after}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZam{}}
+                                           \PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{week\PYZus{}after}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+             \PY{n}{this\PYZus{}df} \PY{o}{=} \PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{week}\PY{p}{)}\PY{o}{\PYZam{}}
+                                          \PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{year}\PY{p}{)}\PY{p}{]}
+             
+             \PY{n}{num\PYZus{}ago} \PY{o}{=} \PY{n}{before\PYZus{}df}\PY{p}{[}\PY{n}{before\PYZus{}df}\PY{p}{[}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{num\PYZus{}next} \PY{o}{=} \PY{n}{after\PYZus{}df}\PY{p}{[}\PY{n}{after\PYZus{}df}\PY{p}{[}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{num\PYZus{}this} \PY{o}{=} \PY{n}{this\PYZus{}df}\PY{p}{[}\PY{n}{this\PYZus{}df}\PY{p}{[}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{num\PYZus{}ago}\PY{p}{,}\PY{n}{num\PYZus{}next}\PY{p}{,}\PY{n}{num\PYZus{}this}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}new\PYZus{}features}\PY{p}{(}\PY{n}{before}\PY{p}{,}\PY{n}{current}\PY{p}{,}\PY{n}{after}\PY{p}{,}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{)}\PY{p}{:}
+             \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{before}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{current}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{after}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         
+             \PY{n}{region\PYZus{}list}\PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{d}\PY{p}{)} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]}
+             \PY{k}{for} \PY{n}{region} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{region\PYZus{}list}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{curr\PYZus{}region} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{region}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{}get all valid dates of that region}
+                 \PY{n}{regional\PYZus{}week\PYZus{}year}\PY{o}{=}\PY{n}{curr\PYZus{}region}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{]}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{}get all store ids of that region}
+                 \PY{n}{regional\PYZus{}stores}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{curr\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StoreID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{week\PYZus{}year\PYZus{}list} \PY{o}{=}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{date} \PY{o+ow}{in} \PY{n}{week\PYZus{}year\PYZus{}list}\PY{p}{:}
+                     \PY{n}{num\PYZus{}ago}\PY{p}{,}\PY{n}{num\PYZus{}next}\PY{p}{,}\PY{n}{num\PYZus{}this} \PY{o}{=} \PY{n}{num\PYZus{}of\PYZus{}features}\PY{p}{(}\PY{n}{regional\PYZus{}week\PYZus{}year}\PY{p}{,}
+                                                                 \PY{n}{date}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                                                                 \PY{n}{date}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                                                 \PY{n}{column\PYZus{}of\PYZus{}interest}\PY{p}{)}
+         
+                     \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZam{}}
+                                  \PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{before}\PY{p}{]}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}ago}\PY{o}{/}\PY{n}{regional\PYZus{}stores}\PY{p}{)}
+                     \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZam{}}
+                                  \PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{after}\PY{p}{]}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}next}\PY{o}{/}\PY{n}{regional\PYZus{}stores}\PY{p}{)}
+                     \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WeekOfYear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZam{}}
+                                  \PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{current}\PY{p}{]}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}this}\PY{o}{/}\PY{n}{regional\PYZus{}stores}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{create\PYZus{}new\PYZus{}features}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HolidaysWeekBefore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HolidaysWeekCurrent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HolidaysWeekAfter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IsHoliday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{create\PYZus{}new\PYZus{}features}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PromoWeekBefore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PromoWeekCurrent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PromoWeekAfter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HasPromotions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 11/11 [01:32<00:00,  8.38s/it]
+100\%|██████████| 11/11 [01:31<00:00,  8.29s/it]
+
+    \end{Verbatim}
+
+    \subsection{Drop NumberOfCustomers}\label{drop-numberofcustomers}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{train\PYZus{}df} \PY{o}{=}\PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfCustomers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Drop closed stores}\label{drop-closed-stores}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{} mask\PYZus{}closed = (train\PYZus{}df[\PYZsq{}IsOpen\PYZsq{}]==False)}
+         \PY{c+c1}{\PYZsh{} train\PYZus{}df=train\PYZus{}df[\PYZti{}mask\PYZus{}closed]}
+         \PY{c+c1}{\PYZsh{} train\PYZus{}df.shape}
+\end{Verbatim}
+
+
+    \subsection{Date dictionary}\label{date-dictionary}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{all\PYZus{}dates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DatetimeIndex}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{month\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}} \PY{n}{d}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{p}{:}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{d}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{all\PYZus{}dates}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \subsection{PCA -\textgreater{} useless}\label{pca---useless}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+         
+         \PY{n}{train\PYZus{}df2} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{sc}\PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{train\PYZus{}scaled} \PY{o}{=} \PY{n}{sc}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{train\PYZus{}df2}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+         \PY{n}{cov\PYZus{}mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{train\PYZus{}scaled}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{eigen\PYZus{}vals}\PY{p}{,} \PY{n}{eigen\PYZus{}vecs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{cov\PYZus{}mat}\PY{p}{)}
+         \PY{n}{tot} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{eigen\PYZus{}vals}\PY{p}{)}
+         \PY{n}{var\PYZus{}exp} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{n}{tot}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{eigen\PYZus{}vals}\PY{p}{,}\PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{]}
+         \PY{n}{cum\PYZus{}var\PYZus{}exp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{var\PYZus{}exp}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cum\PYZus{}var\PYZus{}exp}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.0885402  0.14312627 0.19039511 0.23353448 0.27249089 0.3092255
+ 0.34054463 0.36782221 0.39163594 0.41513407 0.43701514 0.45759482
+ 0.47674043 0.49459287 0.51230881 0.52901529 0.54466006 0.5600574
+ 0.5750247  0.58932052 0.60286445 0.61623207 0.62946464 0.64258977
+ 0.6553859  0.66780464 0.6801545  0.69239363 0.70459161 0.71675621
+ 0.72888809 0.7409871  0.75306151 0.76511292 0.77713714 0.78912656
+ 0.80109447 0.81289145 0.82454647 0.83612541 0.84762407 0.85891663
+ 0.86910631 0.87902717 0.88835199 0.89729907 0.90609942 0.91444323
+ 0.92250559 0.93025305 0.93763962 0.94446129 0.95101731 0.95748109
+ 0.96349962 0.96903134 0.97384288 0.97827558 0.98252482 0.98629139
+ 0.98967567 0.99278265 0.99448472 0.9959177  0.99718424 0.99804833
+ 0.99866456 0.99909162 0.9994921  0.99969113 0.99981823 0.99989784
+ 0.99997238 0.99999988 1.         1.         1.         1.
+ 1.         1.         1.         1.         1.        ]
+
+    \end{Verbatim}
+
+    \subsection{1. Method Training and predicting one-hold
+out}\label{method-training-and-predicting-one-hold-out}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+         
+         \PY{k}{def} \PY{n+nf}{monthly\PYZus{}training}\PY{p}{(}\PY{n}{training\PYZus{}interval}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{03\PYZhy{}2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{02\PYZhy{}2018}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                              \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                              \PY{n}{regressor}\PY{o}{=}\PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{init\PYZus{}date}\PY{o}{=}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{training\PYZus{}interval}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{end\PYZus{}date} \PY{o}{=}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{training\PYZus{}interval}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{month\PYZus{}scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{y\PYZus{}test\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{predicted\PYZus{}list}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{predicted\PYZus{}df\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{training\PYZus{}months} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{training\PYZus{}df\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{month\PYZus{}name}\PY{p}{,} \PY{n}{date} \PY{o+ow}{in} \PY{n}{month\PYZus{}dict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{k}{if} \PY{p}{(}\PY{n}{date} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{init\PYZus{}date}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{date}\PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{end\PYZus{}date}\PY{p}{)} \PY{p}{:}
+                         \PY{k}{if} \PY{n}{verbose}\PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Doing month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{month\PYZus{}name}\PY{p}{)}
+                             
+                         \PY{n}{training\PYZus{}months}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{month\PYZus{}name}\PY{p}{)}
+                         \PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{o}{.}\PY{n}{month}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{date}\PY{o}{.}\PY{n}{year}\PY{p}{)}\PY{p}{)}
+                         \PY{n}{test} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{mask}\PY{p}{]}
+                         \PY{n}{train} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{mask}\PY{p}{]}
+                         
+                         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{NumberOfSales}
+                         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+                         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{NumberOfSales}
+                         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+                         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                         
+                         \PY{c+c1}{\PYZsh{}slightly better with this scaler}
+                         \PY{n}{scaler} \PY{o}{=} \PY{n}{RobustScaler}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{X\PYZus{}train\PYZus{}scaled}\PY{o}{=}\PY{n}{scaler}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+                         \PY{n}{X\PYZus{}test\PYZus{}scaled}\PY{o}{=}\PY{n}{scaler}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                         \PY{n}{reg} \PY{o}{=}  \PY{n}{regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}scaled}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+                         
+                         \PY{n}{train\PYZus{}copy}  \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                         \PY{n}{train\PYZus{}copy} \PY{o}{=} \PY{n}{train\PYZus{}copy}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                         \PY{n}{feat\PYZus{}labels} \PY{o}{=} \PY{n}{train\PYZus{}copy}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{]}
+                         \PY{n}{importances} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}
+                         \PY{n}{indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{importances}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                         \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}scaled}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}\PYZhy{}*s}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{f}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{n}{feat\PYZus{}labels}\PY{p}{[}\PY{n}{indices}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{importances}\PY{p}{[}\PY{n}{indices}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                         
+                         \PY{n}{current\PYZus{}score} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}scaled}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
+                         \PY{n}{current\PYZus{}prediction} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}scaled}\PY{p}{)}
+                         \PY{n}{month\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{current\PYZus{}score}\PY{p}{)}
+                         \PY{n}{predicted\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{current\PYZus{}prediction}\PY{p}{)}
+                         \PY{n}{y\PYZus{}test\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+                         
+                         \PY{k}{if} \PY{n}{verbose} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ has shape }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{month\PYZus{}name}\PY{p}{,}\PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+                             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}Score }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{current\PYZus{}score}\PY{p}{)}\PY{p}{)}
+                         
+                         
+                         \PY{n}{real\PYZus{}df} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{month\PYZus{}test\PYZus{}df} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{mask}\PY{p}{]}
+                         \PY{n}{month\PYZus{}train\PYZus{}df}\PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{mask}\PY{p}{]}
+         
+                         \PY{n}{month\PYZus{}test\PYZus{}df}\PY{o}{=} \PY{n}{month\PYZus{}test\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                         \PY{n}{prediction\PYZus{}}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{current\PYZus{}prediction}\PY{p}{)}
+                         \PY{n}{month\PYZus{}test\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{prediction\PYZus{}}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+                         \PY{n}{predicted\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{month\PYZus{}test\PYZus{}df}\PY{p}{,}\PY{n}{month\PYZus{}train\PYZus{}df}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{predicted\PYZus{}df}\PY{o}{=} \PY{n}{predicted\PYZus{}df}\PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{]}
+                         
+                         \PY{n}{predicted\PYZus{}df\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predicted\PYZus{}df}\PY{p}{)}
+                         \PY{n}{training\PYZus{}df\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train}\PY{p}{)}
+                         
+             \PY{k}{return} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scores}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{month\PYZus{}scores}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{y\PYZus{}test\PYZus{}list}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predictions}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{predicted\PYZus{}list}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training\PYZus{}dates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{training\PYZus{}months}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training\PYZus{}df}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{training\PYZus{}df\PYZus{}list}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted\PYZus{}df}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{predicted\PYZus{}df\PYZus{}list}
+             \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{reg} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{prediction\PYZus{}result} \PY{o}{=} \PY{n}{monthly\PYZus{}training}\PY{p}{(}\PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                                              \PY{n}{training\PYZus{}interval}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{05\PYZhy{}2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{05\PYZhy{}2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                              \PY{n}{regressor} \PY{o}{=} \PY{n}{reg}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Doing month May2017
+ 1 IsOpen                         0.453292
+ 2 NearestCompetitor              0.124347
+ 3 StoreID                        0.112367
+ 4 HasPromotions                  0.071877
+ 5 DayOfYear                      0.017707
+ 6 Region\_PD                      0.017307
+ 7 Region\_AreaKM2                 0.015544
+ 8 day                            0.014602
+ 9 AssortmentType\_General         0.012508
+10 Region\_GDP                     0.011498
+11 Region\_PopulationK             0.009812
+12 month                          0.009215
+13 StoreType\_Hyper Market         0.008035
+14 StoreType\_Standard Market      0.007709
+15 WindDirDegrees                 0.007016
+16 StoreType\_Shopping Center      0.006158
+17 StoreType\_Super Market         0.005962
+18 Min\_Humidity                   0.004555
+19 AssortmentType\_With Non-Food Department 0.004430
+20 HolidaysWeekCurrent            0.004266
+21 PromoWeekCurrent               0.004231
+22 Max\_TemperatureC               0.003735
+23 Max\_Sea\_Level\_PressurehPa      0.003688
+24 Mean\_Humidity                  0.003672
+25 Mean\_Wind\_SpeedKm\_h            0.003573
+26 Min\_Sea\_Level\_PressurehPa      0.003491
+27 Max\_Wind\_SpeedKm\_h             0.003427
+28 Mean\_Sea\_Level\_PressurehPa     0.003283
+29 year                           0.002969
+30 Min\_Dew\_PointC                 0.002948
+31 Mean\_VisibilityKm              0.002924
+32 WeekOfYear                     0.002882
+33 Region\_3                       0.002823
+34 Region\_9                       0.002620
+35 Min\_TemperatureC               0.002562
+36 Max\_Humidity                   0.002385
+37 CloudCover                     0.002383
+38 Max\_Dew\_PointC                 0.002314
+39 Min\_VisibilitykM               0.002312
+40 Mean\_TemperatureC              0.001960
+41 Precipitationmm                0.001882
+42 Mean\_Dew\_PointC                0.001839
+43 Region\_4                       0.001825
+44 Max\_VisibilityKm               0.001611
+45 AssortmentType\_With Fish Department 0.001539
+46 Region\_6                       0.001286
+47 Region\_0                       0.001136
+48 Region\_7                       0.000891
+49 HolidaysWeekAfter              0.000842
+50 Region\_8                       0.000768
+51 Region\_2                       0.000763
+52 PromoWeekBefore                0.000761
+53 DaysInMonth                    0.000642
+54 PromoWeekAfter                 0.000632
+55 Region\_1                       0.000577
+56 Events\_Rain                    0.000577
+57 HolidaysWeekBefore             0.000531
+58 Region\_10                      0.000513
+59 Events\_Normal                  0.000505
+60 Region\_5                       0.000372
+61 Events\_Fog-Rain                0.000366
+62 Events\_Fog                     0.000347
+63 IsHoliday                      0.000284
+64 Events\_Rain-Thunderstorm       0.000274
+65 Hol\_and\_open                   0.000265
+66 Events\_Rain-Snow               0.000148
+67 Events\_Snow                    0.000127
+68 Events\_Fog-Rain-Thunderstorm   0.000088
+69 Events\_Fog-Snow                0.000050
+70 Events\_Fog-Rain-Snow           0.000044
+71 Events\_Thunderstorm            0.000041
+72 Events\_Rain-Hail               0.000029
+73 Events\_Rain-Snow-Hail          0.000017
+74 Events\_Fog-Rain-Snow-Hail      0.000015
+75 Events\_Fog-Rain-Hail           0.000006
+76 Events\_Fog-Thunderstorm        0.000006
+77 Events\_Snow-Hail               0.000003
+78 Events\_Fog-Rain-Hail-Thunderstorm 0.000003
+79 Events\_Rain-Snow-Thunderstorm  0.000002
+80 Events\_Rain-Snow-Hail-Thunderstorm 0.000001
+81 Events\_Fog-Snow-Hail           0.000001
+82 Events\_Rain-Hail-Thunderstorm  0.000000
+Month May2017 has shape (23219, 84)
+	
+-Score 0.9300573015966777
+
+    \end{Verbatim}
+
+    \subsection{2 Method : Cross validation}\label{method-cross-validation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{results} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{k}{for} \PY{n}{storeid} \PY{o+ow}{in} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{StoreID}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{train} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{StoreID} \PY{o}{==} \PY{n}{storeid}\PY{p}{]}
+              \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{NumberOfSales}
+              \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              
+              \PY{n}{model} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{criterion}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mae}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{shuffle} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+              \PY{n}{results}\PY{p}{[}\PY{n}{storeid}\PY{p}{]} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cross\PYZhy{}validation for }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ \PYZhy{}\PYZgt{} score: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{ with +/\PYZhy{} }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PYZbs{}
+                    \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{storeid}\PY{p}{,}\PY{n}{results}\PY{p}{[}\PY{n}{storeid}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{results}\PY{p}{[}\PY{n}{storeid}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cross-validation for 1000 -> score: 0.8892 with +/- 0.0196
+Cross-validation for 1001 -> score: 0.8369 with +/- 0.0707
+Cross-validation for 1002 -> score: 0.9184 with +/- 0.0092
+Cross-validation for 1003 -> score: 0.8758 with +/- 0.0150
+Cross-validation for 1004 -> score: 0.9104 with +/- 0.0242
+Cross-validation for 1005 -> score: 0.8643 with +/- 0.0183
+Cross-validation for 1006 -> score: 0.8672 with +/- 0.0188
+Cross-validation for 1007 -> score: 0.8885 with +/- 0.0249
+Cross-validation for 1008 -> score: 0.8536 with +/- 0.0247
+Cross-validation for 1009 -> score: 0.8342 with +/- 0.0263
+Cross-validation for 1010 -> score: 0.8422 with +/- 0.0324
+Cross-validation for 1011 -> score: 0.8348 with +/- 0.0230
+Cross-validation for 1012 -> score: 0.9393 with +/- 0.0074
+Cross-validation for 1013 -> score: 0.8781 with +/- 0.0321
+Cross-validation for 1014 -> score: 0.8874 with +/- 0.0128
+Cross-validation for 1015 -> score: 0.8557 with +/- 0.0296
+Cross-validation for 1016 -> score: 0.8551 with +/- 0.0327
+Cross-validation for 1017 -> score: 0.8758 with +/- 0.0145
+Cross-validation for 1018 -> score: 0.9089 with +/- 0.0127
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyboardInterrupt                         Traceback (most recent call last)
+
+        <ipython-input-105-66f4941db530> in <module>()
+          8     model = RandomForestRegressor(n\_estimators=50,n\_jobs=-1)
+          9     kfold = KFold(n\_splits=5,shuffle = True, random\_state=7)
+    ---> 10     results[storeid] = cross\_val\_score(model, X\_train, y\_train, scoring='r2', cv=kfold)
+         11     print('Cross-validation for \{\} -> score: \{:.4f\} with +/- \{:.4f\}'          .format(storeid,results[storeid].mean(),results[storeid].std()))
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in cross\_val\_score(estimator, X, y, groups, scoring, cv, n\_jobs, verbose, fit\_params, pre\_dispatch)
+        319                                 n\_jobs=n\_jobs, verbose=verbose,
+        320                                 fit\_params=fit\_params,
+    --> 321                                 pre\_dispatch=pre\_dispatch)
+        322     return cv\_results['test\_score']
+        323 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in cross\_validate(estimator, X, y, groups, scoring, cv, n\_jobs, verbose, fit\_params, pre\_dispatch, return\_train\_score)
+        193             fit\_params, return\_train\_score=return\_train\_score,
+        194             return\_times=True)
+    --> 195         for train, test in cv.split(X, y, groups))
+        196 
+        197     if return\_train\_score:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self, iterable)
+        777             \# was dispatched. In particular this covers the edge
+        778             \# case of Parallel used with an exhausted iterator.
+    --> 779             while self.dispatch\_one\_batch(iterator):
+        780                 self.\_iterating = True
+        781             else:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in dispatch\_one\_batch(self, iterator)
+        623                 return False
+        624             else:
+    --> 625                 self.\_dispatch(tasks)
+        626                 return True
+        627 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_dispatch(self, batch)
+        586         dispatch\_timestamp = time.time()
+        587         cb = BatchCompletionCallBack(dispatch\_timestamp, len(batch), self)
+    --> 588         job = self.\_backend.apply\_async(batch, callback=cb)
+        589         self.\_jobs.append(job)
+        590 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/\_parallel\_backends.py in apply\_async(self, func, callback)
+        109     def apply\_async(self, func, callback=None):
+        110         """Schedule a func to be run"""
+    --> 111         result = ImmediateResult(func)
+        112         if callback:
+        113             callback(result)
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/\_parallel\_backends.py in \_\_init\_\_(self, batch)
+        330         \# Don't delay the application, to avoid keeping the input
+        331         \# arguments in memory
+    --> 332         self.results = batch()
+        333 
+        334     def get(self):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        132 
+        133     def \_\_len\_\_(self):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        132 
+        133     def \_\_len\_\_(self):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in \_fit\_and\_score(estimator, X, y, scorer, train, test, verbose, parameters, fit\_params, return\_train\_score, return\_parameters, return\_n\_test\_samples, return\_times, error\_score)
+        465         fit\_time = time.time() - start\_time
+        466         \# \_score will return dict if is\_multimetric is True
+    --> 467         test\_scores = \_score(estimator, X\_test, y\_test, scorer, is\_multimetric)
+        468         score\_time = time.time() - start\_time - fit\_time
+        469         if return\_train\_score:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in \_score(estimator, X\_test, y\_test, scorer, is\_multimetric)
+        500     """
+        501     if is\_multimetric:
+    --> 502         return \_multimetric\_score(estimator, X\_test, y\_test, scorer)
+        503     else:
+        504         if y\_test is None:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in \_multimetric\_score(estimator, X\_test, y\_test, scorers)
+        530             score = scorer(estimator, X\_test)
+        531         else:
+    --> 532             score = scorer(estimator, X\_test, y\_test)
+        533 
+        534         if hasattr(score, 'item'):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/metrics/scorer.py in \_\_call\_\_(self, estimator, X, y\_true, sample\_weight)
+         99         super(\_PredictScorer, self).\_\_call\_\_(estimator, X, y\_true,
+        100                                              sample\_weight=sample\_weight)
+    --> 101         y\_pred = estimator.predict(X)
+        102         if sample\_weight is not None:
+        103             return self.\_sign * self.\_score\_func(y\_true, y\_pred,
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/ensemble/forest.py in predict(self, X)
+        690         Parallel(n\_jobs=n\_jobs, verbose=self.verbose, backend="threading")(
+        691             delayed(accumulate\_prediction)(e.predict, X, [y\_hat])
+    --> 692             for e in self.estimators\_)
+        693 
+        694         y\_hat /= len(self.estimators\_)
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self, iterable)
+        795         finally:
+        796             if not self.\_managed\_backend:
+    --> 797                 self.\_terminate\_backend()
+        798             self.\_jobs = list()
+        799         output = self.\_output
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_terminate\_backend(self)
+        568     def \_terminate\_backend(self):
+        569         if self.\_backend is not None:
+    --> 570             self.\_backend.terminate()
+        571 
+        572     def \_dispatch(self, batch):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/\_parallel\_backends.py in terminate(self)
+        134         if self.\_pool is not None:
+        135             self.\_pool.close()
+    --> 136             self.\_pool.terminate()  \# terminate does a join()
+        137             self.\_pool = None
+        138 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/multiprocessing/pool.py in terminate(self)
+        539         self.\_state = TERMINATE
+        540         self.\_worker\_handler.\_state = TERMINATE
+    --> 541         self.\_terminate()
+        542 
+        543     def join(self):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/multiprocessing/util.py in \_\_call\_\_(self, wr, \_finalizer\_registry, sub\_debug, getpid)
+        184                 sub\_debug('finalizer calling \%s with args \%s and kwargs \%s',
+        185                           self.\_callback, self.\_args, self.\_kwargs)
+    --> 186                 res = self.\_callback(*self.\_args, **self.\_kwargs)
+        187             self.\_weakref = self.\_callback = self.\_args = \textbackslash{}
+        188                             self.\_kwargs = self.\_key = None
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/multiprocessing/pool.py in \_terminate\_pool(cls, taskqueue, inqueue, outqueue, pool, worker\_handler, task\_handler, result\_handler, cache)
+        580         util.debug('joining worker handler')
+        581         if threading.current\_thread() is not worker\_handler:
+    --> 582             worker\_handler.join()
+        583 
+        584         \# Terminate workers which haven't already finished.
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/threading.py in join(self, timeout)
+       1054 
+       1055         if timeout is None:
+    -> 1056             self.\_wait\_for\_tstate\_lock()
+       1057         else:
+       1058             \# the behavior of a negative timeout isn't documented, but
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/threading.py in \_wait\_for\_tstate\_lock(self, block, timeout)
+       1070         if lock is None:  \# already determined that the C code is done
+       1071             assert self.\_is\_stopped
+    -> 1072         elif lock.acquire(block, timeout):
+       1073             lock.release()
+       1074             self.\_stop()
+
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    \subsection{Feature importance}\label{feature-importance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{rf} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}copy}  \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feat\PYZus{}labels} \PY{o}{=} \PY{n}{train\PYZus{}copy}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{]}
+         \PY{n}{importances} \PY{o}{=} \PY{n}{rf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}
+         \PY{n}{indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{importances}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}\PYZhy{}*s}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{f}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{n}{feat\PYZus{}labels}\PY{p}{[}\PY{n}{indices}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{importances}\PY{p}{[}\PY{n}{indices}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 1 Region\_PD                      0.999999
+ 2 Max\_Sea\_Level\_PressurehPa      0.000000
+ 3 HolidaysWeekAfter              0.000000
+ 4 Min\_Dew\_PointC                 0.000000
+ 5 Max\_Humidity                   0.000000
+ 6 Date                           0.000000
+ 7 DayOfYear                      0.000000
+ 8 Mean\_Sea\_Level\_PressurehPa     0.000000
+ 9 WeekOfYear                     0.000000
+10 Max\_TemperatureC               0.000000
+11 Region\_PopulationK             0.000000
+12 Min\_Humidity                   0.000000
+13 Mean\_Dew\_PointC                0.000000
+14 month                          0.000000
+15 Mean\_TemperatureC              0.000000
+16 Max\_Dew\_PointC                 0.000000
+17 Max\_VisibilityKm               0.000000
+18 Precipitationmm                0.000000
+19 Mean\_Humidity                  0.000000
+20 Events\_Rain                    0.000000
+21 Min\_Sea\_Level\_PressurehPa      0.000000
+22 NearestCompetitor              0.000000
+23 Mean\_VisibilityKm              0.000000
+24 Max\_Wind\_SpeedKm\_h             0.000000
+25 Region\_GDP                     0.000000
+26 StoreType\_Hyper Market         0.000000
+27 Region\_AreaKM2                 0.000000
+28 IsOpen                         0.000000
+29 day                            0.000000
+30 HasPromotions                  0.000000
+31 Region\_4                       0.000000
+32 Region\_3                       0.000000
+33 Mean\_Wind\_SpeedKm\_h            0.000000
+34 CloudCover                     0.000000
+35 Min\_TemperatureC               0.000000
+36 Min\_VisibilitykM               0.000000
+37 StoreID                        0.000000
+38 Hol\_and\_open                   0.000000
+39 PromoWeekBefore                0.000000
+40 StoreType\_Shopping Center      0.000000
+41 Events\_Normal                  0.000000
+42 WindDirDegrees                 0.000000
+43 DaysInMonth                    0.000000
+44 year                           0.000000
+45 Events\_Fog-Rain                0.000000
+46 AssortmentType\_With Non-Food Department 0.000000
+47 Region\_0                       0.000000
+48 Events\_Fog                     0.000000
+49 StoreType\_Standard Market      0.000000
+50 Region\_1                       0.000000
+51 AssortmentType\_General         0.000000
+52 HolidaysWeekCurrent            0.000000
+53 PromoWeekAfter                 0.000000
+54 PromoWeekCurrent               0.000000
+55 HolidaysWeekBefore             0.000000
+56 Events\_Rain-Thunderstorm       0.000000
+57 Region\_10                      0.000000
+58 Region\_9                       0.000000
+59 Events\_Fog-Rain-Thunderstorm   0.000000
+60 StoreType\_Super Market         0.000000
+61 Events\_Snow                    0.000000
+62 Events\_Rain-Snow               0.000000
+63 Region\_2                       0.000000
+64 Events\_Rain-Hail               0.000000
+65 Events\_Fog-Rain-Snow           0.000000
+66 Region\_7                       0.000000
+67 Events\_Rain-Snow-Hail          0.000000
+68 Events\_Fog-Snow                0.000000
+69 Region\_5                       0.000000
+70 AssortmentType\_With Fish Department 0.000000
+71 Events\_Thunderstorm            0.000000
+72 Region\_6                       0.000000
+73 Region\_8                       0.000000
+74 Events\_Fog-Rain-Hail-Thunderstorm 0.000000
+75 Events\_Snow-Hail               0.000000
+76 Events\_Fog-Rain-Snow-Hail      0.000000
+77 Events\_Rain-Snow-Hail-Thunderstorm 0.000000
+78 Events\_Rain-Snow-Thunderstorm  0.000000
+79 Events\_Rain-Hail-Thunderstorm  0.000000
+80 Events\_Fog-Rain-Hail           0.000000
+81 Events\_Fog-Thunderstorm        0.000000
+82 IsHoliday                      0.000000
+83 Events\_Fog-Snow-Hail           0.000000
+
+    \end{Verbatim}
+
+    \subsection{Plotting R\^{}2 Error for each
+month}\label{plotting-r2-error-for-each-month}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{c+c1}{\PYZsh{} os.system(\PYZdq{}say \PYZhy{}v \PYZdq{}+\PYZsq{}Alice\PYZsq{}+\PYZdq{} Ho fatto\PYZdq{})}
+         \PY{n}{trace1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+                     \PY{n}{x}\PY{o}{=}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training\PYZus{}dates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{y}\PY{o}{=}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2 per region}\PY{l+s+s1}{\PYZsq{}}
+             \PY{p}{)}
+         
+         \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training\PYZus{}dates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                             \PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{line} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgb(0, 0, 0)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{dash}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dash}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{shape}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean}\PY{l+s+s1}{\PYZsq{}}
+                            \PY{p}{)}
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{p}{)}
+         \PY{p}{)}
+         \PY{n}{data}\PY{o}{=}\PY{p}{[}\PY{n}{trace1}\PY{p}{,}\PY{n}{trace2}\PY{p}{]}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{basic\PYZhy{}bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsection{Predicted vs Real for
+march17}\label{predicted-vs-real-for-march17}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{regions}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}real}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{data\PYZus{}pred}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{region} \PY{o+ow}{in} \PY{n}{regions}\PY{p}{:}
+             \PY{n}{region\PYZus{}df\PYZus{}real} \PY{o}{=} \PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training\PYZus{}df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training\PYZus{}df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{region}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{region\PYZus{}df\PYZus{}pred} \PY{o}{=} \PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted\PYZus{}df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{prediction\PYZus{}result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted\PYZus{}df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{region}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{sales\PYZus{}real} \PY{o}{=} \PY{n}{region\PYZus{}df\PYZus{}real}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{sales\PYZus{}pred}\PY{o}{=} \PY{n}{region\PYZus{}df\PYZus{}pred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumberOfSales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{data\PYZus{}real}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sales\PYZus{}real}\PY{p}{)}
+             \PY{n}{data\PYZus{}pred}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sales\PYZus{}pred}\PY{p}{)}
+         
+         \PY{n}{trace\PYZus{}r}\PY{o}{=}\PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{,}
+                         \PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}real}\PY{p}{,}
+                         \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real sales}\PY{l+s+s1}{\PYZsq{}}
+                         \PY{p}{)}
+         
+         \PY{n}{trace\PYZus{}p}\PY{o}{=}\PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}pred}\PY{p}{,}
+                          \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Preicted Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{data\PYZus{}tot} \PY{o}{=} \PY{p}{[}\PY{n}{trace\PYZus{}r}\PY{p}{,} \PY{n}{trace\PYZus{}p}\PY{p}{]}
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{barmode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real vs Predicted sales per region in March17}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+             \PY{n}{xaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data\PYZus{}tot}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population info}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
